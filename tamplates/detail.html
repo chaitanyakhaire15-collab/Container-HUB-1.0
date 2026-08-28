@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% block content %}
+<div class="grid md:grid-cols-2 gap-6">
+<div class="bg-white rounded-[24px] border overflow-hidden"><img src="{{c[6]}}" class="w-full h-[360px] object-cover"><div class="p-5"><h2 class="font-bold text-xl">{{c[1]}}</h2><p class="text-slate-500 text-sm mt-1">{{c[2]}} • {{c[3]}} • {{c[4]}} • CSC Verified</p></div></div>
+<div class="bg-white rounded-[24px] border p-6 h-fit sticky top-[88px]">
+<h3 class="font-bold text-lg">Deal Breakdown</h3>
+<div class="mt-4 space-y-3 text-sm">
+<div class="flex justify-between"><span class="text-slate-500">Sale Price</span><span>₹{{"{:,}".format(price)}}</span></div>
+<div class="flex justify-between"><span class="text-slate-500">Buyer Fee ({{buyer_fee//price*100 if price else 3}}% - You Pay)</span><span class="text-blue-600">+ ₹{{"{:,}".format(buyer_fee)}}</span></div>
+<div class="border-t pt-3 flex justify-between font-bold text-[16px]"><span>Buyer Pays Total</span><span>₹{{"{:,}".format(buyer_pays)}}</span></div>
+<div class="bg-slate-50 rounded-xl p-3 mt-2 text-[12px] space-y-1"><div class="flex justify-between"><span>Seller Gets</span><span>₹{{"{:,}".format(seller_gets)}}</span></div><div class="flex justify-between text-green-600 font-semibold"><span>Your Commission (3%+7%)</span><span>₹{{"{:,}".format(profit)}}</span></div></div>
+</div>
+<div class="mt-6 bg-amber-50 border border-amber-200 rounded-xl p-4">
+<p class="text-[13px] font-semibold">🔒 Lock this deal for ₹{{token}}</p><p class="text-[11px] text-slate-600 mt-1">Pay token to unlock seller phone. Token adjusted in final payment. Escrow protected.</p>
+<p class="text-[11px] mt-2 font-medium">UPI: {{upi}}</p>
+</div>
+<form action="/pay-token/{{c[0]}}" method="POST" class="mt-4 space-y-3">
+<input name="name" required placeholder="Your Company Name" class="w-full bg-slate-100 rounded-full px-5 py-3 text-sm outline-none">
+<input name="phone" required placeholder="Phone Number" class="w-full bg-slate-100 rounded-full px-5 py-3 text-sm outline-none">
+<button class="w-full bg-blue-600 text-white py-3.5 rounded-full font-medium">Pay Token & Unlock Seller</button>
+</form>
+<p class="text-[10px] text-center text-slate-400 mt-3">Seller phone hidden until token paid - protects your commission</p>
+</div>
+</div>
+{% endblock %}

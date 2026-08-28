@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 import sqlite3, os
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='tamplates')
 
 # --- CONFIG - EDIT HERE ---
 UPI_ID = "yourupi@paytm"

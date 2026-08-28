@@ -1,0 +1,17 @@
+{% extends "base.html" %}{% block content %}
+<div class="bg-slate-900 text-white rounded-[24px] p-8">
+<p class="text-slate-400 text-sm">Total Platform Profit</p><h1 class="text-4xl font-bold mt-1">₹{{"{:,}".format(total)}}</h1>
+<p class="text-[12px] text-slate-400 mt-2">From {{deals|length}} deals • 3% buyer + 7% seller model</p>
+</div>
+<div class="mt-6 bg-white rounded-[24px] border overflow-hidden">
+<div class="p-5 font-semibold border-b">Deals & Commission</div>
+<div class="overflow-auto">
+<table class="w-full text-sm"><tr class="text-[11px] text-slate-500 bg-slate-50"><th class="text-left p-3">Deal</th><th class="text-left p-3">Buyer Pays</th><th class="text-left p-3">Seller Gets</th><th class="text-left p-3">Your Profit</th><th class="text-left p-3">Status</th></tr>
+{% for d in deals %}
+<tr class="border-t"><td class="p-3">#{{d[0]}} • {{d[2]}}</td><td class="p-3">₹{{"{:,}".format(d[7])}}</td><td class="p-3">₹{{"{:,}".format(d[8])}}</td><td class="p-3 font-bold text-green-600">₹{{"{:,}".format(d[9])}}</td><td class="p-3"><span class="bg-amber-100 text-amber-700 px-2 py-1 rounded-full text-[11px]">{{d[10]}}</span></td></tr>
+{% endfor %}
+</table>
+</div>
+</div>
+<div class="mt-4 text-center"><a href="/reset" class="text-[12px] text-slate-400">Reset Demo Data</a></div>
+{% endblock %}

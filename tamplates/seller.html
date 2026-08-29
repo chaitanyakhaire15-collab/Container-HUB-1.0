@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Seller - Add Container</h2>
+{% if request.args.get('added') %}<p style="color:green">Container Added!</p>{% endif %}
+<form method="POST" style="max-width:400px">
+<input name="title" placeholder="Title - ex: 20ft Dry" required style="width:100%;margin:5px 0;padding:8px">
+<input name="city" placeholder="City - Bhiwandi / Panvel" required style="width:100%;margin:5px 0;padding:8px">
+<select name="size" style="width:100%;margin:5px 0;padding:8px"><option>20ft</option><option>40ft</option></select>
+<select name="type" style="width:100%;margin:5px 0;padding:8px"><option>Dry</option><option>Reefer</option></select>
+<input name="price" type="number" placeholder="Price" required style="width:100%;margin:5px 0;padding:8px">
+<input name="photo" placeholder="Photo URL" required style="width:100%;margin:5px 0;padding:8px">
+<input name="phone" value="{{phone}}" placeholder="Your Phone" required style="width:100%;margin:5px 0;padding:8px">
+<button style="padding:10px 20px;background:black;color:white">Add Container</button>
+</form>
+
+<hr>
+<h3>Search My Containers</h3>
+<form><input name="phone" placeholder="Enter your phone" value="{{phone}}"><button>View</button></form>
+{% for c in my_containers %}
+<p>{{c[1]}} - {{c[2]}} - Rs.{{c[5]}} - {{c[8]}}</p>
+{% endfor %}
+{% endblock %}

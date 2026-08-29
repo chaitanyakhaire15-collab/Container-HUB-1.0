@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Panel</h2>
+<h3>Total Profit: Rs. {{total}}</h3>
+<h4>All Deals ({{deals|length}})</h4>
+{% for d in deals %}
+<div style="border:1px solid black;padding:8px;margin:5px 0">
+#{{d[0]}} | Buyer: {{d[2]}} ({{d[3]}}) | Container: {{d[1]}} | Profit: {{d[9]}} | {{d[10]}}
+</div>
+{% endfor %}
+<hr>
+<h4>All Containers</h4>
+{% for c in containers %}<p>{{c[0]}}. {{c[1]}} - {{c[8]}}</p>{% endfor %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>My Orders</h2>
+<form><input name="phone" placeholder="Enter phone" value="{{phone}}"><button>Check</button></form>
+{% for d in deals %}
+<div style="border:1px solid #ccc;padding:10px;margin:10px 0">
+Order #{{d[0]}} - Container {{d[1]}} - Status: {{d[10]}} - You Paid: {{d[7]}}
+</div>
+{% endfor %}
+{% endblock %}

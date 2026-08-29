@@ -1,14 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Admin Panel</h2>
-<h3>Total Profit: Rs. {{total}}</h3>
-<h4>All Deals ({{deals|length}})</h4>
-{% for d in deals %}
-<div style="border:1px solid black;padding:8px;margin:5px 0">
-#{{d[0]}} | Buyer: {{d[2]}} ({{d[3]}}) | Container: {{d[1]}} | Profit: {{d[9]}} | {{d[10]}}
+<h2>Admin - Commission Dashboard</h2>
+<div style="background:black;color:white;padding:15px;border-radius:10px;display:flex;gap:30px">
+<div>Total Profit: <b style="color:lime">Rs. {{total}}</b></div>
+<div>Total Deals: {{deals|length}}</div>
+<div>Total Containers: {{containers|length}}</div>
 </div>
+
+<h3 style="margin-top:20px">All Deals Commission</h3>
+{% for d in deals %}
+<div style="border:1px solid black;padding:8px;margin:5px 0;font-size:14px">
+<b>#{{d[0]}}</b> | Buyer: {{d[2]}} {{d[3]}} | Container: {{d[1]}}<br>
+Sale: Rs.{{d[4]}} + BuyerFee: Rs.{{d[5]}} = Pay: Rs.{{d[7]}} | Seller Gets: Rs.{{d[8]}} | <b style="color:green">Profit: Rs.{{d[9]}}</b>
+</div>
+{% else %}
+<p>No deals yet - Token payment nahi hua hai abhi tak.</p>
 {% endfor %}
-<hr>
-<h4>All Containers</h4>
-{% for c in containers %}<p>{{c[0]}}. {{c[1]}} - {{c[8]}}</p>{% endfor %}
 {% endblock %}

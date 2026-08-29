@@ -1,10 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>My Orders</h2>
-<form><input name="phone" placeholder="Enter phone" value="{{phone}}"><button>Check</button></form>
-{% for d in deals %}
-<div style="border:1px solid #ccc;padding:10px;margin:10px 0">
-Order #{{d[0]}} - Container {{d[1]}} - Status: {{d[10]}} - You Paid: {{d[7]}}
-</div>
-{% endfor %}
+<form method="GET">
+<input name="phone" placeholder="Apna Phone Number Dalke Search Karo" value="{{phone}}" style="padding:8px;width:250px">
+<button style="padding:8px 15px;background:black;color:white">Check Orders</button>
+</form>
+
+{% if phone %}
+  {% if deals|length == 0 %}
+    <p style="color:red;margin-top:15px">Is number pe koi order nahi hai. Pehle koi container book karo.</p>
+  {% else %}
+    {% for d in deals %}
+    <div style="border:1px solid #ccc;padding:12px;margin:12px 0;border-radius:8px">
+      <b>Order #{{d[0]}}</b><br>
+      Container ID: {{d[1]}}<br>
+      Sale Price: Rs.{{d[4]}}<br>
+      Aapne Pay Kiya: <b>Rs.{{d[7]}}</b><br>
+      Status: <span style="color:green">{{d[10]}}</span><br>
+      <small>Buyer Fee: Rs.{{d[5]}} | Seller Fee: Rs.{{d[6]}} | Hamara Profit: Rs.{{d[9]}}</small>
+    </div>
+    {% endfor %}
+  {% endif %}
+{% endif %}
 {% endblock %}

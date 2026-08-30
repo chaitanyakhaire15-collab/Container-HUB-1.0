@@ -1,23 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Detail</title></head>
-<body style="font-family:sans-serif;margin:0">
-<div style="background:black;color:white;padding:12px"><a href="/" style="color:white;text-decoration:none">← Back</a></div>
-<div style="padding:15px">
-{% if c %}
-<img src="{{c[6]}}" style="width:100%;max-height:250px;object-fit:cover;border-radius:10px">
-<h2>{{c[1]}}</h2>
-<p>{{c[2]}} | {{c[3]}} | {{c[4]}}<br><b>Price: Rs.{{c[5]}}</b><br>Seller: {{c[7]}}</p>
-
-<h3>Book with 5% Token</h3>
-<form method="POST" action="/pay/{{c[0]}}">
-<input name="buyer_name" placeholder="Your Name" required style="padding:10px;width:90%;margin:5px 0"><br>
-<input name="buyer_phone" placeholder="Your Phone" required style="padding:10px;width:90%;margin:5px 0"><br>
-<button style="padding:12px 20px;background:green;color:white;border:none;border-radius:6px;width:95%;margin-top:10px;font-size:16px">Pay Token Rs.{{ (c[5]*0.05)|int }} & Book</button>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pay</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body style="font-family:sans-serif;padding:15px">
+<a href="/">← Back</a>
+<img src="{{c[6]}}" style="width:100%;border-radius:10px">
+<h2>{{c[1]}} - Rs.{{c[5]}}</h2>
+<form id="payform" method="POST" action="/pay/{{c[0]}}">
+<input name="buyer_name" placeholder="Your Name" required style="padding:10px;width:90%"><br><br>
+<input name="buyer_phone" placeholder="Phone" required style="padding:10px;width:90%"><br><br>
+<button type="submit" style="padding:15px;width:95%;background:green;color:white;border:none;border-radius:8px;font-size:18px">Pay Token Rs.{{ (c[5]*0.05)|int }} - Auto Confirm</button>
 </form>
-{% else %}
-<h2>Container Not Found</h2>
-{% endif %}
-</div>
-</body>
-                                                                                                        </html>
+<p><small>Paisa direct tumhare Razorpay account me ayega. No admin needed.</small></p>
+</body></html>

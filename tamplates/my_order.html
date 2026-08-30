@@ -1,25 +1,34 @@
-{% extends "base.html" %}
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1"><title>My Orders</title></head>
+<body style="font-family:sans-serif;margin:0">
+<div style="background:black;color:white;padding:12px;display:flex;gap:12px">
+<a href="/" style="color:white;text-decoration:none;font-weight:bold">Container-HUB</a>
+<a href="/seller" style="color:white;text-decoration:none">Seller</a>
+<a href="/admin?password=admin123" style="color:yellow;text-decoration:none">Admin</a>
+</div>
+<div style="padding:15px">
 <h2>My Orders</h2>
 <form method="GET">
-<input name="phone" placeholder="Apna Phone Number Dalke Search Karo" value="{{phone}}" style="padding:8px;width:250px">
-<button style="padding:8px 15px;background:black;color:white">Check Orders</button>
+<input name="phone" placeholder="Phone Number" value="{{phone}}" style="padding:10px;width:200px;border:1px solid #ccc;border-radius:5px">
+<button style="padding:10px 15px;background:black;color:white;border-radius:5px">Check</button>
 </form>
 
 {% if phone %}
-  {% if deals|length == 0 %}
-    <p style="color:red;margin-top:15px">Is number pe koi order nahi hai. Pehle koi container book karo.</p>
-  {% else %}
+  {% if deals %}
     {% for d in deals %}
-    <div style="border:1px solid #ccc;padding:12px;margin:12px 0;border-radius:8px">
-      <b>Order #{{d[0]}}</b><br>
-      Container ID: {{d[1]}}<br>
-      Sale Price: Rs.{{d[4]}}<br>
-      Aapne Pay Kiya: <b>Rs.{{d[7]}}</b><br>
-      Status: <span style="color:green">{{d[10]}}</span><br>
-      <small>Buyer Fee: Rs.{{d[5]}} | Seller Fee: Rs.{{d[6]}} | Hamara Profit: Rs.{{d[9]}}</small>
+    <div style="border:1px solid #ddd;padding:12px;margin:12px 0;border-radius:8px;background:#f9f9f9">
+      <b>Order #{{d[0]}}</b> - Container {{d[1]}}<br>
+      Buyer: {{d[2]}} - {{d[3]}}<br>
+      Sale: Rs.{{d[4]}} | Fee: Rs.{{d[5]}}<br>
+      <b style="color:green">Pay: Rs.{{d[7]}} - Status: {{d[10]}}</b><br>
+      <small>Profit: Rs.{{d[9]}}</small>
     </div>
     {% endfor %}
+  {% else %}
+    <p style="color:red;margin-top:20px">Koi order nahi mila is number pe: {{phone}}<br>Pehle koi container Buy karo.</p>
   {% endif %}
 {% endif %}
-{% endblock %}
+</div>
+</body>
+</html>

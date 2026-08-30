@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin</title></head>
-<body style="font-family:sans-serif;margin:0">
-<div style="background:black;color:white;padding:12px">
-<a href="/" style="color:white;text-decoration:none">Home</a> | Admin Dashboard
+<head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Dashboard</title></head>
+<body style="font-family:sans-serif;margin:0;background:#f0f0f0">
+<div style="background:#000;color:#fff;padding:15px;display:flex;justify-content:space-between">
+<b>ADMIN PANEL</b>
+<a href="/" style="color:yellow;text-decoration:none">View Site</a>
 </div>
+
+<div style="padding:15px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+<div style="background:white;padding:15px;border-radius:10px;text-align:center"><small>Total Profit</small><br><b style="color:green;font-size:20px">Rs.{{total}}</b></div>
+<div style="background:white;padding:15px;border-radius:10px;text-align:center"><small>Total Sale</small><br><b>Rs.{{total_sale}}</b></div>
+<div style="background:white;padding:15px;border-radius:10px;text-align:center"><small>Deals</small><br><b>{{deals|length}}</b> | Avl: {{available}} Sold: {{sold}}</div>
+</div>
+
 <div style="padding:15px">
-<h2>Commission Dashboard</h2>
-<div style="background:black;color:white;padding:15px;border-radius:10px">
-Total Profit: <b style="color:lime;font-size:20px">Rs. {{total}}</b><br>
-Total Deals: {{deals|length}}
-</div>
+<h3>💰 Commission Deals</h3>
 {% for d in deals %}
-<div style="border:1px solid #000;padding:10px;margin:8px 0">
-#{{d[0]}} | Container {{d[1]}} | {{d[2]}} ({{d[3]}})<br>
-Sale Rs.{{d[4]}} + Fee Rs.{{d[5]}} | Seller Gets Rs.{{d[8]}} | <b style="color:green">Profit Rs.{{d[9]}}</b>
+<div style="background:white;padding:12px;margin:8px 0;border-radius:8px;border-left:4px solid green">
+<b>#{{d[0]}} Container {{d[1]}}</b> - {{d[2]}} ({{d[3]}})<br>
+Sale: Rs.{{d[4]}} | Buyer Fee Rs.{{d[5]}} + Seller Fee Rs.{{d[6]}}<br>
+Buyer Pays Rs.{{d[7]}} | Seller Gets Rs.{{d[8]}} | <b style="color:green">Profit Rs.{{d[9]}}</b> - {{d[10]}}
+</div>
+{% else %}
+<p>No deals yet</p>
+{% endfor %}
+
+<h3>📦 All Containers</h3>
+{% for c in containers %}
+<div style="background:white;padding:10px;margin:5px 0;border-radius:6px;display:flex;justify-content:space-between">
+<span><b>{{c[0]}}. {{c[1]}}</b> - {{c[2]}} - Rs.{{c[5]}} - <small style="color:{% if c[8]=='available' %}green{% else %}red{% endif %}">{{c[8]}}</small></span>
+<a href="/admin/delete/{{c[0]}}?password=admin123" style="color:red;text-decoration:none" onclick="return confirm('Delete?')">Delete</a>
 </div>
 {% endfor %}
 </div>

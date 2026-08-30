@@ -1,19 +1,22 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>Admin - Commission Dashboard</h2>
-<div style="background:black;color:white;padding:15px;border-radius:10px;display:flex;gap:30px">
-<div>Total Profit: <b style="color:lime">Rs. {{total}}</b></div>
-<div>Total Deals: {{deals|length}}</div>
-<div>Total Containers: {{containers|length}}</div>
+<!DOCTYPE html>
+<html>
+<head><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin</title></head>
+<body style="font-family:sans-serif;margin:0">
+<div style="background:black;color:white;padding:12px">
+<a href="/" style="color:white;text-decoration:none">Home</a> | Admin Dashboard
 </div>
-
-<h3 style="margin-top:20px">All Deals Commission</h3>
+<div style="padding:15px">
+<h2>Commission Dashboard</h2>
+<div style="background:black;color:white;padding:15px;border-radius:10px">
+Total Profit: <b style="color:lime;font-size:20px">Rs. {{total}}</b><br>
+Total Deals: {{deals|length}}
+</div>
 {% for d in deals %}
-<div style="border:1px solid black;padding:8px;margin:5px 0;font-size:14px">
-<b>#{{d[0]}}</b> | Buyer: {{d[2]}} {{d[3]}} | Container: {{d[1]}}<br>
-Sale: Rs.{{d[4]}} + BuyerFee: Rs.{{d[5]}} = Pay: Rs.{{d[7]}} | Seller Gets: Rs.{{d[8]}} | <b style="color:green">Profit: Rs.{{d[9]}}</b>
+<div style="border:1px solid #000;padding:10px;margin:8px 0">
+#{{d[0]}} | Container {{d[1]}} | {{d[2]}} ({{d[3]}})<br>
+Sale Rs.{{d[4]}} + Fee Rs.{{d[5]}} | Seller Gets Rs.{{d[8]}} | <b style="color:green">Profit Rs.{{d[9]}}</b>
 </div>
-{% else %}
-<p>No deals yet - Token payment nahi hua hai abhi tak.</p>
 {% endfor %}
-{% endblock %}
+</div>
+</body>
+</html>

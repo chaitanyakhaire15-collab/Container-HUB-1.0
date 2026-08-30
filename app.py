@@ -110,6 +110,13 @@ def reset():
     if os.path.exists('database.db'): os.remove('database.db')
     init_db()
     return redirect('/')
+    @app.route('/commission')
+def commission_alias():
+    return redirect('/admin?password=admin123')
+
+@app.route('/buying')
+def buying_alias():
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)
